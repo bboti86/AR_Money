@@ -2,8 +2,6 @@ import './style.css';
 import { calculateMoneyPhysicalVolume } from './calculator';
 import { ARMoneyScene } from './ar-scene';
 
-// Ensure the Three.js and AR logic only initializes after DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('ui-container');
   let arScene: ARMoneyScene | null = null;
   
@@ -59,4 +57,3 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-});
