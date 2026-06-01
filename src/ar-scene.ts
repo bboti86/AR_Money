@@ -159,16 +159,21 @@ export class ARMoneyScene {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
-  private render(timestamp: number, frame: XRFrame) {
+  private render(_timestamp: number, frame: XRFrame) {
     if (frame) {
       const referenceSpace = this.renderer.xr.getReferenceSpace();
       const session = this.renderer.xr.getSession();
 
       if (this.hitTestSourceRequested === false && session) {
         session.requestReferenceSpace('viewer').then((referenceSpace) => {
-          session.requestHitTestSource({ space: referenceSpace })?.then((source) => {
-            this.hitTestSource = source;
-          });
+          if (session.requestHitTestSource) {
+            const hitTestPromise = session.requestHitTestSource({ space: referenceSpace });
+            if (hitTestPromise) {
+              hitTestPromise.then((source) => {
+                this.hitTestSource = source;
+              });
+            }
+          }
         });
         session.addEventListener('end', () => {
           this.hitTestSourceRequested = false;
