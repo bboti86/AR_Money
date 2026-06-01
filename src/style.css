@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #f3f4f6; /* gray-100 */
+}
+
+/* Ensure the Three.js canvas takes up the whole screen if not specified otherwise */
+canvas {
+  display: block;
+}
+
+#ui-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+#ui-content {
+  pointer-events: auto;
+}
